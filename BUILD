@@ -251,8 +251,8 @@ upb_proto_library(
     name = "conformance_proto_upb",
     upbc = ":protoc-gen-upb",
     deps = [
-        "@com_google_protobuf//:conformance_proto",
-        "@com_google_protobuf//:test_messages_proto3_proto",
+        "@conformance_protobuf//:conformance_proto",
+        "@conformance_protobuf//:test_messages_proto3_proto",
     ],
 )
 
@@ -270,7 +270,7 @@ cc_binary(
 make_shell_script(
     name = "gen_test_conformance_upb",
     out = "test_conformance_upb.sh",
-    contents = "$(rlocation com_google_protobuf/conformance_test_runner) $(rlocation upb/conformance_upb)",
+    contents = "$(rlocation conformance_protobuf/conformance_test_runner) $(rlocation upb/conformance_upb)",
 )
 
 sh_test(
@@ -280,7 +280,7 @@ sh_test(
         "tests/conformance_upb_failures.txt",
         ":conformance_upb",
         "@bazel_tools//tools/bash/runfiles",
-        "@com_google_protobuf//:conformance_test_runner",
+        "@conformance_protobuf//:conformance_test_runner",
     ],
 )
 
@@ -385,8 +385,8 @@ cc_library(
     hdrs = ["upbc/generator.h"],
     srcs = ["upbc/generator.cc", "upbc/message_layout.h", "upbc/message_layout.cc"],
     deps = [
-        "@com_google_protobuf//:protobuf",
-        "@com_google_protobuf//:protoc_lib",
+        "@conformance_protobuf//:protobuf",
+        "@conformance_protobuf//:protoc_lib",
         "@absl//absl/strings",
     ],
 )
@@ -396,7 +396,7 @@ cc_binary(
     srcs = ["upbc/main.cc"],
     deps = [
         ":upbc_generator",
-        "@com_google_protobuf//:protoc_lib",
+        "@conformance_protobuf//:protoc_lib",
     ],
 )
 
@@ -504,9 +504,9 @@ genrule(
         "generated/google/protobuf/descriptor.upb.h",
         "generated/google/protobuf/descriptor.upb.c",
     ],
-    cmd = "$(location @com_google_protobuf//:protoc) $< --upb_out=$(GENDIR)/generated --plugin=protoc-gen-upb=$(location :protoc-gen-upb)",
+    cmd = "$(location @conformance_protobuf//:protoc) $< --upb_out=$(GENDIR)/generated --plugin=protoc-gen-upb=$(location :protoc-gen-upb)",
     tools = [
-        "@com_google_protobuf//:protoc",
+        "@conformance_protobuf//:protoc",
         ":protoc-gen-upb"
     ],
 )

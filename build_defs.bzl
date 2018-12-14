@@ -253,7 +253,7 @@ _upb_proto_library_srcs = rule(
         "protoc": attr.label(
             executable = True,
             cfg = "host",
-            default = "@com_google_protobuf//:protoc",
+            default = "@conformance_protobuf//:protoc",
         ),
         "deps": attr.label_list(),
     }
