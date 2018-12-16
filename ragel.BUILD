@@ -159,6 +159,11 @@ cc_binary(
         "aapl/avltree.h",
     ],
     includes = ["ragel", "aapl"],
+    copts = [
+        "-Wno-unused-const-variable",
+        "-Wno-overloaded-virtual",
+        "-Winconsistent-missing-override",
+    ],
 )
 
 config_h_contents = """
